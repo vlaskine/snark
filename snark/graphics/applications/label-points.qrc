@@ -1,0 +1,11 @@
+ <!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+     <file>images/save.png</file>
+     <file>images/select.png</file>
+     <file>images/fuzzy-selection.png</file>   
+     <file>images/fuzzy-selection-id.png</file>
+     <file>images/pipette.png</file>
+     <file>images/bucket.png</file>
+     <file>images/pointer.png</file>     
+ </qresource>
+ </RCC>

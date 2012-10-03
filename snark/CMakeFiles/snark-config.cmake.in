@@ -1,0 +1,51 @@
+#-----------------------------------------------------------------------------
+#
+# snark_config.cmake - snark CMake configuration file for external projects.
+#
+# This file is configured by snark and used by the use_snark.cmake module
+# to load snark's settings for an external project.
+@snark_CONFIG_INSTALL_ONLY@
+
+SET(snark_INCLUDE_DIRS "@snark_INCLUDE_DIRS_CONFIG@")
+
+SET(snark_LIBRARY_DIRS "@snark_LIBRARY_DIRS_CONFIG@")
+
+SET( snark_ALL_LIBRARIES "@snark_ALL_LIBRARIES@" )
+SET( snark_ALL_EXTERNAL_LIBRARIES "@snark_ALL_EXTERNAL_LIBRARIES@" )
+
+# The snark binary executable directories.  Note that if
+# snark_CONFIGURATION_TYPES is set (see below) then these directories
+# will be the parent directories under which there will be a directory
+# of runtime binaries for each configuration type.
+SET(snark_EXECUTABLE_DIRS "@snark_EXECUTABLE_DIRS_CONFIG@")
+
+# The snark runtime library directories.  Note that if
+# snark_CONFIGURATION_TYPES is set (see below) then these directories
+# will be the parent directories under which there will be a directory
+# of runtime libraries for each configuration type.
+SET(snark_RUNTIME_LIBRARY_DIRS "@snark_RUNTIME_LIBRARY_DIRS_CONFIG@")
+
+# The runtime library path variable name e.g. LD_LIBRARY_PATH,
+# this environment variable should be set to snark_RUNTIME_LIBRARY_DIRS
+SET(snark_RUNTIME_PATH_VAR_NAME "@SHARED_LIBRARY_PATH_VAR_NAME@")
+
+SET(snark_REQUIRED_C_FLAGS "@snark_REQUIRED_C_FLAGS@")
+SET(snark_REQUIRED_CXX_FLAGS "@snark_REQUIRED_CXX_FLAGS@")
+SET(snark_REQUIRED_EXE_LINKER_FLAGS "@snark_REQUIRED_EXE_LINKER_FLAGS@")
+SET(snark_REQUIRED_SHARED_LINKER_FLAGS "@snark_REQUIRED_SHARED_LINKER_FLAGS@")
+SET(snark_REQUIRED_MODULE_LINKER_FLAGS "@snark_REQUIRED_MODULE_LINKER_FLAGS@")
+
+SET(snark_MAJOR_VERSION "@snark_MAJOR_VERSION@")
+SET(snark_MINOR_VERSION "@snark_MINOR_VERSION@")
+SET(snark_BUILD_VERSION "@snark_BUILD_VERSION@")
+
+SET(snark_USE_FILE "@snark_USE_FILE@")
+
+SET(snark_BUILD_SHARED_LIBS "@BUILD_SHARED_LIBS@")
+
+IF( WIN32 )
+  ADD_DEFINITIONS( -DNOMINMAX )
+ENDIF(WIN32)
+
+INCLUDE_DIRECTORIES(${snark_INCLUDE_DIRS})
+LINK_DIRECTORIES(${snark_LIBRARY_DIRS})
