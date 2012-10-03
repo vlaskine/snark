@@ -1,20 +1,20 @@
-// This file is part of rur, a generic and flexible library 
+// This file is part of snark, a generic and flexible library 
 // for robotics research.
 //
 // Copyright (C) 2011 The University of Sydney
 //
-// rur is free software; you can redistribute it and/or
+// snark is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
 // License as published by the Free Software Foundation; either
 // version 3 of the License, or (at your option) any later version.
 //
-// rur is distributed in the hope that it will be useful, but WITHOUT ANY
+// snark is distributed in the hope that it will be useful, but WITHOUT ANY
 // WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 // FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 // for more details.
 //
 // You should have received a copy of the GNU Lesser General Public
-// License along with rur. If not, see <http://www.gnu.org/licenses/>.
+// License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef RUR_GRAPHICS_POINT_POINT_H_
 #define RUR_GRAPHICS_POINT_POINT_H_
@@ -26,7 +26,7 @@
 #include <boost/static_assert.hpp>
 #include <comma/math/compare.h>
 
-namespace rur { namespace graphics {
+namespace snark { namespace graphics {
 
 /// @todo tear down this file; use Eigen instead...
     
@@ -291,14 +291,14 @@ struct position
     position operator/( T rhs ) const { position p( *this ); p /= rhs; return p; }
 };
 
-} } // namespace rur { namespace graphics {
+} } // namespace snark { namespace graphics {
 
-namespace rur { namespace visiting {
+namespace snark { namespace visiting {
 
-template < typename T > struct Traits< rur::graphics::point_xyz< T > >
+template < typename T > struct Traits< snark::graphics::point_xyz< T > >
 {
     template < typename Key, class Visitor >
-    static void visit( const Key&, const rur::graphics::point_xyz< T >& p, Visitor& v )
+    static void visit( const Key&, const snark::graphics::point_xyz< T >& p, Visitor& v )
     {
         v.apply( "x", p.x() ); 
         v.apply( "y", p.y() ); 
@@ -306,7 +306,7 @@ template < typename T > struct Traits< rur::graphics::point_xyz< T > >
     }
 
     template < typename Key, class Visitor >
-    static void visit( Key, rur::graphics::point_xyz< T >& p, Visitor& v )
+    static void visit( Key, snark::graphics::point_xyz< T >& p, Visitor& v )
     {
         v.apply( "x", p.x() );
         v.apply( "y", p.y() ); 
@@ -314,10 +314,10 @@ template < typename T > struct Traits< rur::graphics::point_xyz< T > >
     }
 };
 
-template < typename T > struct Traits< rur::graphics::orientation< T > >
+template < typename T > struct Traits< snark::graphics::orientation< T > >
 {
     template < typename Key, class Visitor >
-    static void visit( const Key&, const rur::graphics::orientation< T >& p, Visitor& v )
+    static void visit( const Key&, const snark::graphics::orientation< T >& p, Visitor& v )
     {
         v.apply( "roll", p.roll() );
         v.apply( "pitch", p.pitch() );
@@ -326,7 +326,7 @@ template < typename T > struct Traits< rur::graphics::orientation< T > >
     }
 
     template < typename Key, class Visitor >
-    static void visit( Key, rur::graphics::orientation< T >& p, Visitor& v )
+    static void visit( Key, snark::graphics::orientation< T >& p, Visitor& v )
     {
         v.apply( "roll", p[ orientation< T >::roll_index ] );
         v.apply( "pitch", p[ orientation< T >::pitch_index ] );
@@ -334,23 +334,23 @@ template < typename T > struct Traits< rur::graphics::orientation< T > >
     }
 };
 
-template < typename T > struct Traits< rur::graphics::position< T > >
+template < typename T > struct Traits< snark::graphics::position< T > >
 {
     template < typename Key, class Visitor >
-    static void visit( const Key&, const rur::graphics::position< T >& p, Visitor& v )
+    static void visit( const Key&, const snark::graphics::position< T >& p, Visitor& v )
     {
         v.apply( "coordinates", p.coordinates );
         v.apply( "orientation", p.orientation );
     }
     
     template < typename Key, class Visitor >
-    static void visit( Key, rur::graphics::position< T >& p, Visitor& v )
+    static void visit( Key, snark::graphics::position< T >& p, Visitor& v )
     {
         v.apply( "coordinates", p.coordinates );
         v.apply( "orientation", p.orientation );
     }
 };
 
-} } // namespace rur { namespace visiting {
+} } // namespace snark { namespace visiting {
 
 #endif /*RUR_GRAPHICS_POINT_POINT_H_*/

@@ -1,20 +1,20 @@
-// This file is part of rur, a generic and flexible library
+// This file is part of snark, a generic and flexible library
 // for robotics research.
 //
 // Copyright (C) 2011 The University of Sydney
 //
-// rur is free software; you can redistribute it and/or
+// snark is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public
 // License as published by the Free Software Foundation; either
 // version 3 of the License, or (at your option) any later version.
 //
-// rur is distributed in the hope that it will be useful, but WITHOUT ANY
+// snark is distributed in the hope that it will be useful, but WITHOUT ANY
 // WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 // FOR A PARTICULAR PURPOSE. See the GNU General Public License
 // for more details.
 //
 // You should have received a copy of the GNU General Public
-// License along with rur. If not, see <http://www.gnu.org/licenses/>.
+// License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
 #define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
@@ -34,16 +34,16 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/optional.hpp>
 #include <comma/String/String.h>
-#include <rur/graphics/Vector.h>
+#include <snark/graphics/Vector.h>
 #include <comma/Math/Pi.h>
 
-#include <rur/graphics/Qt3D/View.h>
+#include <snark/graphics/Qt3D/View.h>
 
 #include "./Dataset.h"
 #include "./PointWithId.h"
 #include "./Tools.h"
 
-namespace rur { namespace graphics { namespace View {
+namespace snark { namespace graphics { namespace View {
 
 class Viewer : public Qt3D::View
 {
@@ -107,6 +107,6 @@ class Viewer : public Qt3D::View
         double m_sceneRadius;
 };
 
-} } } // namespace rur { namespace graphics { namespace View {
+} } } // namespace snark { namespace graphics { namespace View {
 
 #endif // RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
