@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
-#define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
+#define SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
 
 #include <map>
 #include <sstream>
@@ -228,5 +228,5 @@ struct PointMap : public impl::MultidimensionalMapimpl< typename P::Scalar, T, P
 
 } // namespace snark {
 
-#endif // RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
+#endif // SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_POINTMAP_H_
 

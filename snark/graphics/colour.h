@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_COLOUR_HEADER_GUARD_
-#define RUR_GRAPHICS_COLOUR_HEADER_GUARD_
+#ifndef SNARK_GRAPHICS_COLOUR_HEADER_GUARD_
+#define SNARK_GRAPHICS_COLOUR_HEADER_GUARD_
 
 #include <boost/lexical_cast.hpp>
 #include <comma/base/exception.h>
@@ -327,4 +327,4 @@ template < typename T > struct traits< snark::graphics::colour< T > >
 
 } } // namespace snark { namespace Visiting {
 
-#endif /*RUR_GRAPHICS_COLOUR_HEADER_GUARD_*/
+#endif /*SNARK_GRAPHICS_COLOUR_HEADER_GUARD_*/

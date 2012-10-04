@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_EXTENTS_HEADER_GUARD_
-#define RUR_GRAPHICS_EXTENTS_HEADER_GUARD_
+#ifndef SNARK_GRAPHICS_EXTENTS_HEADER_GUARD_
+#define SNARK_GRAPHICS_EXTENTS_HEADER_GUARD_
 
 #include <boost/array.hpp>
 #include <boost/optional.hpp>
@@ -211,4 +211,4 @@ template < typename T > struct traits< snark::graphics::extents< T > >
 
 } } // namespace comma { namespace visiting {
 
-#endif // #ifndef RUR_GRAPHICS_EXTENTS_HEADER_GUARD_
+#endif // #ifndef SNARK_GRAPHICS_EXTENTS_HEADER_GUARD_

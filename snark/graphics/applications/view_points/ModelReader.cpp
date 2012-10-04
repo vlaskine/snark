@@ -17,7 +17,7 @@
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
 #include <Eigen/Core>
-#include <comma/Math/rotation_matrix.h>
+#include <snark/graphics/qt3d/rotation_matrix.h>
 #include "./ModelReader.h"
 #include "./Texture.h"
 
@@ -30,7 +30,7 @@ namespace snark { namespace graphics { namespace View {
 /// @param z_up z axis is pointing up in model coordinates
 /// @param c color used for the label
 /// @param label text displayed as label
-ModelReader::ModelReader( QGLView& viewer, comma::csv::Options& options, const std::string& file, bool z_up, snark::graphics::View::coloured* c, const std::string& label )
+ModelReader::ModelReader( QGLView& viewer, comma::csv::options& options, const std::string& file, bool z_up, snark::graphics::View::coloured* c, const std::string& label )
     : Reader( viewer, options, 1, c, 1, label, QVector3D( 0, 1, 1 ) ), // TODO make offset configurable ?
       m_file( file ),
       m_z_up( z_up )
@@ -48,7 +48,7 @@ void ModelReader::start()
     {
         m_scene = QGLAbstractScene::loadScene( QLatin1String( m_file.c_str() ) );
     }
-    m_extents = comma::Extents< Eigen::Vector3f >();
+    m_extents = snark::graphics::extents< Eigen::Vector3f >();
 
     m_thread.reset( new boost::thread( boost::bind( &Reader::read, boost::ref( *this ) ) ) );
 }
@@ -100,7 +100,7 @@ bool ModelReader::readOnce()
     if( !m_stream ) // quick and dirty: handle named pipes
     {
         if( !m_istream() ) { return true; }
-        m_stream.reset( new csv::InputStream< PointWithId >( *m_istream(), options ) );
+        m_stream.reset( new comma::csv::input_stream< PointWithId >( *m_istream(), options ) );
     }
     const PointWithId* p = m_stream->read();
     if( p == NULL ) { m_shutdown = true; return false; }

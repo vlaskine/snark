@@ -43,21 +43,21 @@ void BasicDataset::visible( bool visible ) { m_visible = visible; }
 
 bool BasicDataset::visible() const { return m_visible; }
 
-const Extents< Eigen::Vector3d >& BasicDataset::extents() const { return m_extents; }
+const snark::graphics::extents< Eigen::Vector3d >& BasicDataset::extents() const { return m_extents; }
 
 void BasicDataset::clear()
 {
     m_points.clear();
     m_partitions.clear();
     m_vertices.reset();
-    m_extents = Extents< Eigen::Vector3d >();
+    m_extents = snark::graphics::extents< Eigen::Vector3d >();
 }
 
 void BasicDataset::init()
 {
     m_vertices.reset();
     if( m_points.empty() ) { return; }
-    m_vertices.reset( new Qt3D::vertex_buffer( m_points.size() ) );
+    m_vertices.reset( new qt3d::vertex_buffer( m_points.size() ) );
     for( Points::ConstEnumerator en = m_points.begin(); !en.end(); ++en )
     {
         Eigen::Vector3d pointXYZ =  en.key() - *m_offset;
@@ -73,7 +73,7 @@ void BasicDataset::draw( QGLPainter* painter ) const
     {
         painter->setStandardEffect(QGL::FlatPerVertexColor);
         painter->clearAttributes();
-        painter->setVertexAttribute(QGL::position, m_vertices->points() );
+        painter->setVertexAttribute(QGL::Position, m_vertices->points() );
         painter->setVertexAttribute(QGL::Color, m_vertices->color() );
         painter->draw( QGL::Points, m_vertices->size(), m_vertices->index() );
     }
@@ -111,7 +111,7 @@ void BasicDataset::erase( const BasicDataset::Points& m ) // quick and dirty
     init();
 } 
 
-Dataset::Dataset( const std::string& filename, const csv::Options& options, bool relabelDuplicated )
+Dataset::Dataset( const std::string& filename, const comma::csv::options& options, bool relabelDuplicated )
     : m_filename( filename )
     , m_options( options )
     , m_writable( true )
@@ -123,7 +123,7 @@ Dataset::Dataset( const std::string& filename, const csv::Options& options, bool
 }
 
 Dataset::Dataset( const std::string& filename
-                , const csv::Options& options
+                , const comma::csv::options& options
                 , const Eigen::Vector3d& offset
                 , bool relabelDuplicated )
     : m_filename( filename )
@@ -151,7 +151,7 @@ void Dataset::save()
     if( !ofs.good() ) { std::cerr << "label-points: error: failed to open " << m_filename << std::endl; return; }
     std::vector< std::string > v = comma::split( m_options.fields, ',' ); // quick and dirty
     for( std::size_t i = 0; i < v.size(); ++i ) { if( v[i] != "id" ) { v[i] = ""; } }
-    std::string fields = join( v, ',' );
+    std::string fields = comma::join( v, ',' );
     boost::scoped_ptr< comma::csv::ascii_output_stream< PointWithId > > ascii;
     boost::scoped_ptr< comma::csv::binary_output_stream< PointWithId > > binary;
     if( m_options.binary() ) { binary.reset( new comma::csv::binary_output_stream< PointWithId >( ofs, m_options.format().string(), fields, false ) ); }
@@ -184,10 +184,10 @@ void Dataset::load()
     this->BasicDataset::clear();
     std::ifstream ifs( m_filename.c_str(), m_options.binary() ? std::ios::binary | std::ios::in : std::ios::in );
     if( !ifs.good() ) { COMMA_THROW( graphics::exception, "failed to open \"" << m_filename << "\"" ); }
-    boost::scoped_ptr< csv::AsciiInputStream< PointWithId > > ascii;
-    boost::scoped_ptr< csv::BinaryInputStream< PointWithId > > binary;
-    if( m_options.binary() ) { binary.reset( new csv::BinaryInputStream< PointWithId >( ifs, m_options.format().string(), m_options.fields, false ) ); }
-    else { ascii.reset( new csv::AsciiInputStream< PointWithId >( ifs, m_options.fields, m_options.delimiter, false ) ); }
+    boost::scoped_ptr< comma::csv::ascii_input_stream< PointWithId > > ascii;
+    boost::scoped_ptr< comma::csv::binary_input_stream< PointWithId > > binary;
+    if( m_options.binary() ) { binary.reset( new comma::csv::binary_input_stream< PointWithId >( ifs, m_options.format().string(), m_options.fields, false ) ); }
+    else { ascii.reset( new comma::csv::ascii_input_stream< PointWithId >( ifs, m_options.fields, m_options.delimiter, false ) ); }
     std::size_t count = 0;
     try
     {
@@ -267,7 +267,7 @@ const BasicDataset& Dataset::selection() const { return *m_selection; }
 
 const std::string& Dataset::filename() const { return m_filename; }
 
-const csv::Options& Dataset::options() const { return m_options; }
+const comma::csv::options& Dataset::options() const { return m_options; }
 
 void Dataset::writable( bool enabled ) { m_writable = enabled; }
 
@@ -277,7 +277,7 @@ bool Dataset::modified() const { return m_modified; }
 
 void Dataset::commit() { m_modified = false; }
 
-void Dataset::repair( const csv::Options& options ) // quick and dirty
+void Dataset::repair( const comma::csv::options& options ) // quick and dirty
 {
     std::cerr << "label-points: repairing " << options.filename << "..." << std::endl;
     Dataset dataset( options.filename, options, false );

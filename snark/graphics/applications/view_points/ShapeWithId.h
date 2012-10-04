@@ -16,18 +16,17 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_
 
 #include <boost/foreach.hpp>
 #include <boost/optional.hpp>
-#include <comma/Base/Types.h>
-#include <comma/Math/Pi.h>
-#include <comma/Math/Extents.h>
-#include <comma/Math/rotation_matrix.h>
-#include <comma/Visiting/traits.h>
+#include <comma/base/types.h>
+#include <comma/visiting/traits.h>
+#include <snark/graphics/impl/extents.h>
+#include <snark/graphics/qt3d/rotation_matrix.h>
+#include <snark/graphics/qt3d/vertex_buffer.h>
 #include <Qt3D/qglnamespace.h>
-#include <snark/graphics/Qt3D/vertex_buffer.h>
 #include <Qt3D/qglpainter.h>
 
 namespace snark { namespace graphics { namespace View {
@@ -38,8 +37,8 @@ struct ShapeWithId // quick and dirty
     typedef S Shape;
     ShapeWithId() : id( 0 ), block( 0 ) {}
     S shape;
-    uint32 id;
-    uint32 block;
+    comma::uint32 id;
+    comma::uint32 block;
     QColor4ub color;
     std::string label;
     double scalar;
@@ -55,7 +54,7 @@ struct Shapetraits< Eigen::Vector3d >
     static const QGL::DrawingMode drawingMode = QGL::Points;
     static const unsigned int size = 1;
     
-    static void update( const Eigen::Vector3d& p, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, Qt3D::vertex_buffer& buffer, boost::optional< comma::Extents< Eigen::Vector3f > >& extents  )
+    static void update( const Eigen::Vector3d& p, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, qt3d::vertex_buffer& buffer, boost::optional< snark::graphics::extents< Eigen::Vector3f > >& extents  )
     {
         Eigen::Vector3d point = p - offset;
         buffer.addVertex( QVector3D( point.x(), point.y(), point.z() ), color, block );
@@ -76,10 +75,10 @@ struct Shapetraits< Eigen::Vector3d >
 };
 
 template<>
-struct Shapetraits< comma::Extents< Eigen::Vector3d > >
+struct Shapetraits< snark::graphics::extents< Eigen::Vector3d > >
 {
     static const unsigned int size = 8;
-    static void update( const comma::Extents< Eigen::Vector3d >& e, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, Qt3D::vertex_buffer& buffer, boost::optional< comma::Extents< Eigen::Vector3f > >& extents  )
+    static void update( const snark::graphics::extents< Eigen::Vector3d >& e, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, qt3d::vertex_buffer& buffer, boost::optional< snark::graphics::extents< Eigen::Vector3f > >& extents  )
     {
         Eigen::Vector3f min = ( e.min() - offset ).cast< float >();
         Eigen::Vector3f max = ( e.max() - offset ).cast< float >();
@@ -118,16 +117,16 @@ struct Shapetraits< comma::Extents< Eigen::Vector3d > >
         }
     }
     
-    static const Eigen::Vector3d& somePoint( const comma::Extents< Eigen::Vector3d >& extents ) { return extents.min(); }
+    static const Eigen::Vector3d& somePoint( const snark::graphics::extents< Eigen::Vector3d >& extents ) { return extents.min(); }
     
-    static Eigen::Vector3d centre( const comma::Extents< Eigen::Vector3d >& extents ) { return ( extents.min() + extents.max() ) / 2; }
+    static Eigen::Vector3d centre( const snark::graphics::extents< Eigen::Vector3d >& extents ) { return ( extents.min() + extents.max() ) / 2; }
 };
 
 template<>
 struct Shapetraits< std::pair< Eigen::Vector3d, Eigen::Vector3d > >
 {
     static const unsigned int size = 2;
-    static void update( const std::pair< Eigen::Vector3d, Eigen::Vector3d >& p, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, Qt3D::vertex_buffer& buffer, boost::optional< comma::Extents< Eigen::Vector3f > >& extents  )
+    static void update( const std::pair< Eigen::Vector3d, Eigen::Vector3d >& p, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, qt3d::vertex_buffer& buffer, boost::optional< snark::graphics::extents< Eigen::Vector3f > >& extents  )
     {
         Eigen::Vector3f first = ( p.first - offset ).cast< float >();
         Eigen::Vector3f second = ( p.second - offset ).cast< float >();
@@ -163,11 +162,11 @@ template < std::size_t Size >
 struct Shapetraits< Ellipse< Size > >
 {
     static const unsigned int size = Size;
-    static void update( const Ellipse< Size >& ellipse, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, Qt3D::vertex_buffer& buffer, boost::optional< comma::Extents< Eigen::Vector3f > >& extents  )
+    static void update( const Ellipse< Size >& ellipse, const Eigen::Vector3d& offset, const QColor4ub& color, unsigned int block, qt3d::vertex_buffer& buffer, boost::optional< snark::graphics::extents< Eigen::Vector3f > >& extents  )
     {
         Eigen::Vector3d c = ellipse.centre - offset;
         const Eigen::Matrix3d& r = rotation_matrix::rotation( ellipse.orientation );
-        static const double step = comma::Math::pi * 2 / Size;
+        static const double step = 3.14159265358979323846l * 2 / Size;
         double angle = 0;
         // todo: use native opengl rotation and normals instead
         for( std::size_t i = 0; i < Size; ++i, angle += step )
@@ -198,7 +197,7 @@ struct Shapetraits< Ellipse< Size > >
 
 } } }
 
-namespace snark { namespace Visiting {
+namespace comma { namespace visiting {
 
 template <> struct traits< QColor4ub >
 {
@@ -272,6 +271,6 @@ template < std::size_t Size > struct traits< snark::graphics::View::Ellipse< Siz
     }
 };
 
-} } // namespace snark { namespace Visiting {
+} } // namespace comma { namespace visiting {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPEWITHID_H_*/

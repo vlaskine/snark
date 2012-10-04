@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -27,19 +27,19 @@
 
 #include <boost/optional.hpp>
 #include <boost/thread.hpp>
-#include <snark/graphics/Qt3D/View.h>
+#include <snark/graphics/qt3d/view.h>
 #include "./CameraReader.h"
 #include "./Reader.h"
 
 namespace snark { namespace graphics { namespace View {
 
-class Viewer : public Qt3D::View
+class Viewer : public qt3d::view
 {
     Q_OBJECT
 public:
     std::vector< boost::shared_ptr< Reader > > readers;
     Viewer( const QColor4ub& background_color, double fov, bool z_up, bool orthographic = false,
-            boost::optional< comma::csv::Options > cameracsv = boost::optional< comma::csv::Options >(),
+            boost::optional< comma::csv::options > cameracsv = boost::optional< comma::csv::options >(),
             boost::optional< Eigen::Vector3d > cameraposition = boost::optional< Eigen::Vector3d >(),
             boost::optional< Eigen::Vector3d > cameraorientation = boost::optional< Eigen::Vector3d >()
           );
@@ -52,7 +52,7 @@ private:
     
     void initializeGL( QGLPainter *painter );
     void paintGL( QGLPainter *painter );
-    void setCameraposition( const Eigen::Vector3d& position, const Eigen::Vector3d& orientation );
+    void setCameraPosition( const Eigen::Vector3d& position, const Eigen::Vector3d& orientation );
     
     bool m_shutdown;
     bool m_lookAt;
@@ -64,4 +64,4 @@ private:
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VIEWER_H_*/

@@ -20,8 +20,8 @@
 #include <boost/array.hpp>
 #include <boost/lexical_cast.hpp>
 #include <qnamespace.h>
-#include <comma/String/String.h>
-#include "./coloured.h"
+#include <comma/string/string.h>
+#include "./Coloured.h"
 
 namespace snark { namespace graphics { namespace View {
 
@@ -328,7 +328,7 @@ coloured* colourFromString( const std::string& s, const std::string& fields, con
             else if( v[i] == "quadratic" ) { linear = false; }
             else
             {
-                std::vector< std::string > w = split( v[i], ':' );
+                std::vector< std::string > w = comma::split( v[i], ':' );
                 if( w[0][0] >= 'a' && w[0][0] <= 'z' )
                 {
                     from_color = color_from_name( w[0] );

@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_
 
 #include <deque>
 #include <iostream>
@@ -25,14 +25,13 @@
 #include <sstream>
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>
-#include <comma/csv/Stream.h>
-#include <comma/Io/Stream.h>
-#include <comma/Io/Stream.h>
-#include <comma/Eigen/Visiting.h>
+#include <comma/csv/stream.h>
+#include <comma/io/stream.h>
+#include <snark/visiting/eigen.h>
 
 namespace snark { namespace graphics { namespace View {
 
-struct PointWithorientation // quick and dirty
+struct point_with_orientation // quick and dirty
 {
     Eigen::Vector3d point;
     Eigen::Vector3d orientation;
@@ -42,9 +41,9 @@ struct PointWithorientation // quick and dirty
 class CameraReader
 {
     public:
-        const csv::Options options;
+        const comma::csv::options options;
 
-        CameraReader( csv::Options& options );
+        CameraReader( comma::csv::options& options );
 
         void start();
         bool readOnce();
@@ -59,24 +58,23 @@ class CameraReader
 
     private:
         bool m_shutdown;
-        Io::IStream m_istream;
+        comma::io::istream m_istream;
         Eigen::Vector3d m_position;
         Eigen::Vector3d m_orientation;
-        boost::scoped_ptr< csv::InputStream< PointWithorientation > > m_stream;
+        boost::scoped_ptr< comma::csv::input_stream< point_with_orientation > > m_stream;
         mutable boost::recursive_mutex m_mutex; // todo: make lock-free
-        
         boost::scoped_ptr< boost::thread > m_thread;
 
 };
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-namespace snark { namespace Visiting {
+namespace comma { namespace visiting {
 
-template <> struct traits< snark::graphics::View::PointWithorientation >
+template <> struct traits< snark::graphics::View::point_with_orientation >
 {
     template < typename Key, class Visitor >
-    static void visit( Key, snark::graphics::View::PointWithorientation& p, Visitor& v )
+    static void visit( Key, snark::graphics::View::point_with_orientation& p, Visitor& v )
     {
         v.apply( "point", p.point );
         v.apply( "roll", p.orientation.x() );
@@ -85,7 +83,7 @@ template <> struct traits< snark::graphics::View::PointWithorientation >
     }
 
     template < typename Key, class Visitor >
-    static void visit( Key, const snark::graphics::View::PointWithorientation& p, Visitor& v )
+    static void visit( Key, const snark::graphics::View::point_with_orientation& p, Visitor& v )
     {
         v.apply( "point", p.point );
         v.apply( "roll", p.orientation.x() );
@@ -94,6 +92,6 @@ template <> struct traits< snark::graphics::View::PointWithorientation >
     }
 };
 
-} }
+} } // namespace comma { namespace visiting {
     
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_CAMERAREADER_H_*/

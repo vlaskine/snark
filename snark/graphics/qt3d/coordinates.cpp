@@ -18,7 +18,7 @@
 
 #include "./coordinates.h"
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 coordinates::coordinates( float size, float thickness ):
     m_node( new QGLSceneNode() )
@@ -83,5 +83,5 @@ QGLSceneNode* coordinates::node() const
 }
 
 
-} } } // namespace snark { namespace graphics
+} } } // namespace snark { namespace graphics { namespace qt3d {
 

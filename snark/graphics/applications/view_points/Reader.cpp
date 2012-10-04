@@ -28,17 +28,17 @@
 #include <sstream>
 #include <boost/bind.hpp>
 #include <Eigen/Core>
-#include <comma/Base/exception.h>
-#include <comma/Base/Types.h>
-#include <comma/csv/Stream.h>
-#include <comma/Io/Select.h>
-#include <comma/Math/rotation_matrix.h>
+#include <comma/base/exception.h>
+#include <comma/base/types.h>
+#include <comma/csv/stream.h>
+#include <comma/io/select.h>
+#include <snark/graphics/qt3d/rotation_matrix.h>
 #include "./Reader.h"
 #include "./Texture.h"
 
 namespace snark { namespace graphics { namespace View {
 
-Reader::Reader( QGLView& viewer, csv::Options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label, const QVector3D& offset )
+Reader::Reader( QGLView& viewer, comma::csv::options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label, const QVector3D& offset )
     : size( size )
     , pointSize( pointSize )
     , options( options )
@@ -46,7 +46,7 @@ Reader::Reader( QGLView& viewer, csv::Options& options, std::size_t size, colour
     , m_colored( c )
     , m_shutdown( false )
     , m_show( true )
-    , m_istream( options.filename, options.binary() ? Io::Mode::binary : Io::Mode::ascii, Io::Mode::nonBlocking )
+    , m_istream( options.filename, options.binary() ? comma::io::mode::binary : comma::io::mode::ascii, comma::io::mode::non_blocking )
     , m_label( label )
     , m_offset( offset )
 {
@@ -81,7 +81,7 @@ void Reader::updatePoint( const Eigen::Vector3d& offset )
         m_translation = QVector3D( m_point->x() - offset.x(), m_point->y() - offset.y(), m_point->z() - offset.z() );
         if( m_orientation )
         {
-            const Eigen::Quaterniond& q = comma::rotation_matrix( *m_orientation ).quaternion();
+            const Eigen::Quaterniond& q = snark::rotation_matrix( *m_orientation ).quaternion();
             m_quaternion = QQuaternion( q.w(), q.x(), q.y(), q.z() );
         }
     }
@@ -98,7 +98,7 @@ void Reader::drawLabel( QGLPainter *painter, const QVector3D& position, const st
             world( 1, 0 ) , world( 1, 1 ), world( 1, 2 ),
             world( 2, 0 ) , world( 2, 1 ), world( 2, 2 );
     R.transposeInPlace();
-    comma::rotation_matrix rotation( R );
+    snark::rotation_matrix rotation( R );
     Eigen::Quaterniond q = rotation.quaternion();
     painter->modelViewMatrix().rotate( QQuaternion( q.w(), q.x(), q.y(), q.z() ) );
     painter->modelViewMatrix().translate( m_offset );

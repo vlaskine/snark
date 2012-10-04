@@ -18,10 +18,10 @@
 
 #include <QTimer>
 #include <boost/array.hpp>
-#include <snark/graphics/impl/rotation_matrix.h>
+#include "./rotation_matrix.h"
 #include "./view.h"
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 /// constructor
 /// @param background_color background color
@@ -323,5 +323,5 @@ void view::mouseDoubleClickEvent( QMouseEvent *e )
 }
 
 
-} } } // namespace snark { namespace graphics { namespace GL {
+} } } // namespace snark { namespace graphics { namespace qt3d {
    

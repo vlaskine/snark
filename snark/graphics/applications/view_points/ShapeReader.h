@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -34,7 +34,7 @@ template< typename S >
 class ShapeReader : public Reader
 {
     public:
-        ShapeReader( QGLView& viewer, csv::Options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label );
+        ShapeReader( QGLView& viewer, comma::csv::options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label );
 
         void start();
         void update( const Eigen::Vector3d& offset );
@@ -47,8 +47,8 @@ class ShapeReader : public Reader
         typedef std::deque< ShapeWithId< S > > DequeType;
         DequeType m_deque;
         mutable boost::mutex m_mutex;
-        boost::scoped_ptr< csv::InputStream< ShapeWithId< S > > > m_stream;
-        Qt3D::vertex_buffer m_buffer;
+        boost::scoped_ptr< comma::csv::input_stream< ShapeWithId< S > > > m_stream;
+        qt3d::vertex_buffer m_buffer;
         std::vector< std::pair< QVector3D, std::string > > m_labels;
         unsigned int m_labelIndex;
         unsigned int m_labelSize;
@@ -56,7 +56,7 @@ class ShapeReader : public Reader
 
 
 template< typename S >    
-ShapeReader< S >::ShapeReader( QGLView& viewer, csv::Options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label  ):
+ShapeReader< S >::ShapeReader( QGLView& viewer, comma::csv::options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label  ):
     Reader( viewer, options, size, c, pointSize, label ),
     m_buffer( size * Shapetraits< S >::size ),
     m_labels( size ),
@@ -68,7 +68,7 @@ ShapeReader< S >::ShapeReader( QGLView& viewer, csv::Options& options, std::size
 template< typename S >
 inline void ShapeReader< S >::start()
 {
-    m_extents = comma::Extents< Eigen::Vector3f >();
+    m_extents = snark::graphics::extents< Eigen::Vector3f >();
     m_thread.reset( new boost::thread( boost::bind( &Reader::read, boost::ref( *this ) ) ) );
 }
 
@@ -103,7 +103,7 @@ inline void ShapeReader< S >::render( QGLPainter* painter )
 {
     painter->setStandardEffect(QGL::FlatPerVertexColor);
     painter->clearAttributes();
-    painter->setVertexAttribute(QGL::position, m_buffer.points() );
+    painter->setVertexAttribute(QGL::Position, m_buffer.points() );
     painter->setVertexAttribute(QGL::Color, m_buffer.color() );
 
     Shapetraits< S >::draw( painter, m_buffer.size(), m_buffer.index() );
@@ -132,7 +132,7 @@ inline bool ShapeReader< S >::readOnce()
 #endif
                 return true;                
             }
-            m_stream.reset( new csv::InputStream< ShapeWithId< S > >( *m_istream(), options ) );
+            m_stream.reset( new comma::csv::input_stream< ShapeWithId< S > >( *m_istream(), options ) );
         }
         const ShapeWithId< S >* p = m_stream->read();
         if( p == NULL )
@@ -169,4 +169,4 @@ inline bool ShapeReader< S >::readOnce()
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif // RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_
+#endif // SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_SHAPE_READER_H_

@@ -16,13 +16,13 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_
 
 #include <Qt3D/qvector3darray.h>
 #include <Qt3D/qcolor4ub.h>
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 /// circular double buffer for vertices and color
 class vertex_buffer
@@ -48,6 +48,6 @@ class vertex_buffer
         unsigned int m_block;
 };
 
-} } } // namespace snark { namespace graphics { namespace View {
+} } } // namespace snark { namespace graphics { namespace qt3d {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_VERTEX_BUFFER_H_*/

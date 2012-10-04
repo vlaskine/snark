@@ -31,9 +31,9 @@
 namespace snark { namespace graphics { namespace View {
 
 Viewer::Viewer( const QColor4ub& background_color, double fov, bool z_up, bool orthographic,
-                boost::optional< comma::csv::Options > cameracsv, boost::optional< Eigen::Vector3d > cameraposition,
+                boost::optional< comma::csv::options > camera_csv, boost::optional< Eigen::Vector3d > cameraposition,
                 boost::optional< Eigen::Vector3d > cameraorientation ) :
-    Qt3D::View( background_color, fov, z_up, orthographic ),
+    qt3d::view( background_color, fov, z_up, orthographic ),
     m_lookAt( false ),
     m_cameraposition( cameraposition ),
     m_cameraorientation( cameraorientation )
@@ -41,9 +41,9 @@ Viewer::Viewer( const QColor4ub& background_color, double fov, bool z_up, bool o
     QTimer* timer = new QTimer( this );
     timer->start( 40 );
     connect( timer, SIGNAL( timeout() ), this, SLOT( read() ) );
-    if( cameracsv )
+    if( camera_csv )
     {
-        m_cameraReader.reset( new CameraReader( *cameracsv ) );
+        m_cameraReader.reset( new CameraReader( *camera_csv ) );
     }
     m_cameraFixed = m_cameraposition || m_cameraReader;
 }
@@ -94,7 +94,7 @@ void Viewer::read()
 
     if( !m_cameraReader && m_cameraposition )
     {
-        setCameraposition( *m_cameraposition, *m_cameraorientation );
+        setCameraPosition( *m_cameraposition, *m_cameraorientation );
         m_cameraposition.reset();
         m_cameraorientation.reset();
     }
@@ -106,7 +106,7 @@ void Viewer::read()
         {
             m_cameraposition = position;
             m_cameraorientation = orientation;
-            setCameraposition( position, orientation );
+            setCameraPosition( position, orientation );
         }
     }
     else if( readers[0]->m_extents && readers[0]->m_extents->size() > 0 && ( m_shutdown || readers[0]->m_extents->size() >= readers[0]->size / 10 ) )
@@ -141,7 +141,7 @@ void Viewer::paintGL( QGLPainter *painter )
     draw_coordinates( painter );
 }
 
-void Viewer::setCameraposition ( const Eigen::Vector3d& position, const Eigen::Vector3d& orientation )
+void Viewer::setCameraPosition ( const Eigen::Vector3d& position, const Eigen::Vector3d& orientation )
 {
     Eigen::Vector3d p = position - *m_offset;
     if( m_z_up )

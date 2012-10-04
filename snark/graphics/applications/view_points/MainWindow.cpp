@@ -97,8 +97,8 @@ void MainWindow::updateFileFrame() // quick and dirty
     {
         for( unsigned int k = 0; k < 2; ++k )
         {
-            if( m_fileLayout->itemAtposition( i + 1, k ) == NULL ) { continue; }
-            QWidget* widget = m_fileLayout->itemAtposition( i + 1, k )->widget();
+            if( m_fileLayout->itemAtPosition( i + 1, k ) == NULL ) { continue; }
+            QWidget* widget = m_fileLayout->itemAtPosition( i + 1, k )->widget();
             m_fileLayout->removeWidget( widget );
             delete widget;
         }

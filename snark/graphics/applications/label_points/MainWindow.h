@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_MAINWINDOW_H
-#define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_MAINWINDOW_H
+#ifndef SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_MAINWINDOW_H
+#define SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_MAINWINDOW_H
 
 #include <string>
 #include <QMainWindow>

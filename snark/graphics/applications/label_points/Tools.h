@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_
-#define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_
+#define SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_
 
 #include <boost/optional.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -26,7 +26,8 @@
 #include <qevent.h>
 #include <qobject.h>
 #include <comma/base/types.h>
-#include <snark/graphics/extents.h>
+#include <snark/graphics/impl/extents.h>
+#include <Eigen/Core>
 #include <Qt3D/qcolor4ub.h>
 #include <Qt3D/qglpainter.h>
 #include "./Icons.h"
@@ -112,4 +113,4 @@ class SelectClip : public Tool
 
 } } } } // namespace snark { namespace graphics { namespace View { namespace Tools {
 
-#endif // RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_
+#endif // SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_TOOLS_H_

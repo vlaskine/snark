@@ -19,7 +19,7 @@
 #include "./vertex_buffer.h"
 
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 vertex_buffer::vertex_buffer ( std::size_t size ):
     m_readIndex( 0 ),
@@ -85,4 +85,4 @@ const unsigned int vertex_buffer::index() const
 
 
     
-} } } // namespace snark { namespace graphics { namespace View {
+} } } // namespace snark { namespace graphics { namespace qt3d {

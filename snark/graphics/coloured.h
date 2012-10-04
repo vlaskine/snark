@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_COLOURED_H_
-#define RUR_GRAPHICS_COLOURED_H_
+#ifndef SNARK_GRAPHICS_COLOURED_H_
+#define SNARK_GRAPHICS_COLOURED_H_
 
 #include <boost/array.hpp>
 #include <comma/Visiting/traits.h>
@@ -60,4 +60,4 @@ template < typename T, typename S > struct traits< snark::graphics::coloured< T,
 
 } } // namespace snark { namespace Visiting {
 
-#endif /*RUR_GRAPHICS_GL_COLOURED_H_*/
+#endif /*SNARK_GRAPHICS_GL_COLOURED_H_*/

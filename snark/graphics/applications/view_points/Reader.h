@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_
 
 #include <deque>
 #include <fstream>
@@ -26,17 +26,17 @@
 #include <sstream>
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>
-#include <comma/Base/Types.h>
-#include <comma/csv/Options.h>
-#include <comma/csv/Stream.h>
-#include <comma/Io/FileDescriptor.h>
-#include <comma/Io/Stream.h>
-#include <comma/Math/Extents.h>
-#include <comma/Sync/Synchronized.h>
-#include <snark/graphics/Queue.h>
-#include "./coloured.h"
+#include <comma/base/types.h>
+#include <comma/csv/options.h>
+#include <comma/csv/stream.h>
+#include <comma/io/file_descriptor.h>
+#include <comma/io/stream.h>
+#include <comma/sync/synchronized.h>
+#include <snark/graphics/impl/extents.h>
+#include <snark/graphics/queue.h>
+#include "./Coloured.h"
 #include "./PointWithId.h"
-#include <snark/graphics/Qt3D/vertex_buffer.h>
+#include <snark/graphics/qt3d/vertex_buffer.h>
 #include <Qt3D/qglview.h>
 
 class QGLAbstractScene;
@@ -50,9 +50,9 @@ class Reader
     public:
         const std::size_t size;
         const unsigned int pointSize;
-        const csv::Options options;
+        const comma::csv::options options;
 
-        Reader( QGLView& viewer, csv::Options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label, const QVector3D& offset = QVector3D( 0, 0, 0 ) );
+        Reader( QGLView& viewer, comma::csv::options& options, std::size_t size, coloured* c, unsigned int pointSize, const std::string& label, const QVector3D& offset = QVector3D( 0, 0, 0 ) );
 
         virtual ~Reader() {}
 
@@ -76,11 +76,11 @@ class Reader
         
         friend class Viewer;
         QGLView& m_viewer;
-        boost::optional< comma::Extents< Eigen::Vector3f > > m_extents;
+        boost::optional< snark::graphics::extents< Eigen::Vector3f > > m_extents;
         boost::scoped_ptr< coloured > m_colored;
         bool m_shutdown;
         bool m_show;
-        Io::IStream m_istream;
+        comma::io::istream m_istream;
         boost::scoped_ptr< boost::thread > m_thread;
         mutable boost::mutex m_mutex;
         boost::optional< Eigen::Vector3d > m_point;
@@ -97,4 +97,4 @@ class Reader
     
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_READER_H_*/

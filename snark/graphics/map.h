@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_MAP_HEADER_GUARD_
-#define RUR_GRAPHICS_MAP_HEADER_GUARD_
+#ifndef SNARK_GRAPHICS_MAP_HEADER_GUARD_
+#define SNARK_GRAPHICS_MAP_HEADER_GUARD_
 
 #include <map>
 #include <snark/graphics/impl/renderable.h>
@@ -88,4 +88,4 @@ inline void Map< K, T >::erase( K key )
 
 } } // namespace snark { namespace graphics {
 
-#endif // RUR_GRAPHICS_MAP_HEADER_GUARD_
+#endif // SNARK_GRAPHICS_MAP_HEADER_GUARD_

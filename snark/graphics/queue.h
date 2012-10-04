@@ -16,10 +16,10 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_QUEUE_HEADER_GUARD_
-#define RUR_GRAPHICS_QUEUE_HEADER_GUARD_
+#ifndef SNARK_GRAPHICS_QUEUE_HEADER_GUARD_
+#define SNARK_GRAPHICS_QUEUE_HEADER_GUARD_
 
-#include <comma/Math/Cyclic.h>
+#include <comma/math/cyclic.h>
 #include <snark/graphics/impl/renderable.h>
 
 namespace snark { namespace graphics {
@@ -41,7 +41,7 @@ class Queue : public impl::renderable< T >
         void push( const T& t );
 
     private:
-        Math::Cyclic< std::size_t > m_end;
+        comma::math::cyclic< std::size_t > m_end;
 };
 
 template < typename T >
@@ -60,4 +60,4 @@ inline void Queue< T >::push( const T& t )
 
 } } // namespace snark { namespace graphics {
 
-#endif // RUR_GRAPHICS_QUEUE_HEADER_GUARD_
+#endif // SNARK_GRAPHICS_QUEUE_HEADER_GUARD_

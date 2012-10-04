@@ -16,11 +16,11 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_
 
-#include <comma/Base/Types.h>
-#include <comma/Eigen/Visiting.h>
+#include <comma/base/types.h>
+#include <snark/visiting/eigen.h>
 #include <Qt3D/qcolor4ub.h>
 #include "./ShapeWithId.h"
 
@@ -31,8 +31,8 @@ struct PointWithId // quick and dirty
     PointWithId() : id( 0 ), block( 0 ) {}
     Eigen::Vector3d point;
     Eigen::Vector3d orientation;
-    uint32 id;
-    uint32 block;
+    comma::uint32 id;
+    comma::uint32 block;
     QColor4ub color;
     std::string label;
     double scalar;
@@ -40,7 +40,7 @@ struct PointWithId // quick and dirty
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-namespace snark { namespace Visiting {
+namespace comma { namespace visiting {
 
 template <> struct traits< snark::graphics::View::PointWithId >
 {
@@ -74,6 +74,6 @@ template <> struct traits< snark::graphics::View::PointWithId >
 };
 
 
-} } // namespace snark { namespace Visiting {
+} } // namespace comma { namespace visiting {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_POINTWITHID_H_*/

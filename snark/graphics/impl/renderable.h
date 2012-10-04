@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_IMPL_RENDERABLE_H_
-#define RUR_GRAPHICS_IMPL_RENDERABLE_H_
+#ifndef SNARK_GRAPHICS_IMPL_RENDERABLE_H_
+#define SNARK_GRAPHICS_IMPL_RENDERABLE_H_
 
 #include <snark/graphics/traits.h>
 
@@ -41,4 +41,4 @@ class renderable
 
 } } } // namespace snark { namespace graphics { namespace impl {
 
-#endif // RUR_GRAPHICS_IMPL_RENDERABLE_H_
+#endif // SNARK_GRAPHICS_IMPL_RENDERABLE_H_

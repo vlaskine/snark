@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_
 
 #include <Qt3D/qgltexture2d.h>
 #include <Qt3D/qglscenenode.h>
@@ -25,7 +25,7 @@
 #include <Qt3D/qglpainter.h>
 #include <Qt3D/qglcylinder.h>
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 /// display a coordinate system    
 class coordinates
@@ -42,6 +42,6 @@ private:
 
 
 
-} } } // namespace snark { namespace graphics
+} } } // namespace snark { namespace graphics { namespace qt3d {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COORDINATES_H_*/

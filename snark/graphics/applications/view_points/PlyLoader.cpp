@@ -108,7 +108,7 @@ PlyLoader::PlyLoader( const std::string& file )
     }
     else
     {
-        m_vertices.addAttribute( QGL::position, vertices );
+        m_vertices.addAttribute( QGL::Position, vertices );
         m_vertices.addAttribute( QGL::Color, colors );
         m_vertices.upload();
         m_sceneNode = NULL;

@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_POINT_POINT_H_
-#define RUR_GRAPHICS_POINT_POINT_H_
+#ifndef SNARK_GRAPHICS_POINT_POINT_H_
+#define SNARK_GRAPHICS_POINT_POINT_H_
 
 #include <string.h>
 #include <algorithm>
@@ -353,4 +353,4 @@ template < typename T > struct Traits< snark::graphics::position< T > >
 
 } } // namespace snark { namespace visiting {
 
-#endif /*RUR_GRAPHICS_POINT_POINT_H_*/
+#endif /*SNARK_GRAPHICS_POINT_POINT_H_*/

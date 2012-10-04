@@ -127,9 +127,9 @@ boost::shared_ptr< snark::graphics::View::Reader > makeReader( QGLView& viewer
     std::string label = options.value< std::string >( "--label", "" );
     if( properties != "" )
     {
-        comma::name_value::Parser nameValue( "filename", ';', '=', false );
+        comma::name_value::parser nameValue( "filename", ';', '=', false );
         csv = nameValue.get( properties, csvOptions );
-        comma::name_value::Map m( properties, "filename", ';', '=' );
+        comma::name_value::map m( properties, "filename", ';', '=' );
         size = m.value( "size", size );
         pointSize = m.value( "point-size", pointSize );
         shape = m.value( "shape", shape );
@@ -205,10 +205,10 @@ boost::shared_ptr< snark::graphics::View::Reader > makeReader( QGLView& viewer
             && v[i] != "scalar"
             && v[i] != "" ) { v[i] = "shape/" + v[i]; } }
     csv.fields = comma::join( v, ',' );
-    csv.fullXPath = true;
+    csv.full_xpath = true;
     if( shape == "extents" )
     {
-        return boost::shared_ptr< snark::graphics::View::Reader >( new snark::graphics::View::ShapeReader< comma::Extents< Eigen::Vector3d > >( viewer, csv, size, coloured, pointSize, label ) );
+        return boost::shared_ptr< snark::graphics::View::Reader >( new snark::graphics::View::ShapeReader< snark::graphics::extents< Eigen::Vector3d > >( viewer, csv, size, coloured, pointSize, label ) );
     }
     else if( shape == "line" )
     {
@@ -231,7 +231,7 @@ int main( int argc, char** argv )
         std::vector< std::string > properties = options.unnamed( "--z-is-up,--orthographic"
                 , "--binary,--bin,-b,--fields,--size,--delimiter,-d,--colour,-c,--point-size,--image-size,--background-colour,--shape,--label,--camera,--camera-position,--fov,--model,--full-xpath" );
         QColor4ub backgroundcolour( QColor( QString( options.value< std::string >( "--background-colour", "#000000" ).c_str() ) ) );
-        boost::optional< comma::csv::options > cameracsv; 
+        boost::optional< comma::csv::options > camera_csv; 
         boost::optional< Eigen::Vector3d > cameraposition;
         boost::optional< Eigen::Vector3d > cameraorientation;
 
@@ -267,32 +267,32 @@ int main( int argc, char** argv )
         if( options.exists( "--camera-position" ) )
         {
             std::string position = options.value< std::string >( "--camera-position" );
-            comma::name_value::Parser parser( "x,y,z,roll,pitch,yaw", ',', '=', false );
-            snark::graphics::View::PointWithorientation pose;
+            comma::name_value::parser parser( "x,y,z,roll,pitch,yaw", ',', '=', false );
+            snark::graphics::View::point_with_orientation pose;
             try
             {
-                pose = parser.get< snark::graphics::View::PointWithorientation >( position );
+                pose = parser.get< snark::graphics::View::point_with_orientation >( position );
                 cameraposition = pose.point;
                 cameraorientation = pose.orientation;
             }
             catch( ... ) {}
             if( !cameraposition )
             {
-                comma::name_value::Parser parser( "filename", ';', '=', false );
+                comma::name_value::parser parser( "filename", ';', '=', false );
                 try
                 {
                     std::cerr << " parse " << position << std::endl;
-                    cameracsv = parser.get< comma::csv::options >( position );
-                    cameracsv->fullXPath = false;
-                    if( cameracsv->fields.empty() )
+                    camera_csv = parser.get< comma::csv::options >( position );
+                    camera_csv->full_xpath = false;
+                    if( camera_csv->fields.empty() )
                     {
-                        cameracsv->fields = "x,y,z,roll,pitch,yaw";
+                        camera_csv->fields = "x,y,z,roll,pitch,yaw";
                     }
                 }
                 catch( ... ) {}
             }
         }
-        snark::graphics::View::Viewer* viewer = new snark::graphics::View::Viewer( backgroundcolour, fieldOfView, z_up, cameraOrthographic, cameracsv, cameraposition, cameraorientation );
+        snark::graphics::View::Viewer* viewer = new snark::graphics::View::Viewer( backgroundcolour, fieldOfView, z_up, cameraOrthographic, camera_csv, cameraposition, cameraorientation );
         bool stdinAdded = false;
         for( unsigned int i = 0; i < properties.size(); ++i )
         {

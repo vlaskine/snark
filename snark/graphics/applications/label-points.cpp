@@ -70,15 +70,15 @@ int main( int argc, char** argv )
         if( csvOptions.fields == "" ) { csvOptions.fields = "x,y,z,id"; }
         std::vector< std::string > files = options.unnamed( "--repair,--fix-duplicated",
                                                             "--binary,--bin,-b,--fields,--delimiter,-d,--background-colour,--precision,--orthographic,--fov" );
-        std::vector< comma::csv::options > datasetcsvOptions;
+        std::vector< comma::csv::options > dataset_csv_options;
         bool fixDuplicated = options.exists( "--fix-duplicated" );        
         for( std::size_t i = 0; i < files.size(); ++i )
         {
-            datasetcsvOptions.push_back( comma::name_value::Parser( "filename" ).get( files[i], csvOptions ) );
+            dataset_csv_options.push_back( comma::name_value::parser( "filename" ).get( files[i], csvOptions ) );
         }
         if( options.exists( "--repair" ) ) // quick and dirty
         {
-            for( std::size_t i = 0; i < datasetcsvOptions.size(); ++i ) { snark::graphics::View::Dataset::repair( datasetcsvOptions[i] ); }
+            for( std::size_t i = 0; i < dataset_csv_options.size(); ++i ) { snark::graphics::View::Dataset::repair( dataset_csv_options[i] ); }
             return 0;
         }
         else
@@ -86,7 +86,7 @@ int main( int argc, char** argv )
             QApplication application( argc, argv );
             bool orthographic = options.exists( "--orthographic" );
             double fieldOfView = options.value< double >( "--fov", 45 );
-            boost::scoped_ptr< snark::graphics::View::Viewer > viewer( new snark::graphics::View::Viewer( datasetcsvOptions, fixDuplicated, backgroundcolour, orthographic, fieldOfView ) );
+            boost::scoped_ptr< snark::graphics::View::Viewer > viewer( new snark::graphics::View::Viewer( dataset_csv_options, fixDuplicated, backgroundcolour, orthographic, fieldOfView ) );
             snark::graphics::View::MainWindow mainWindow( comma::join( argv, argc, ' ' ), viewer.get() );
             mainWindow.show();
             /*return*/ application.exec();

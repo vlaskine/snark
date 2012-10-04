@@ -58,9 +58,9 @@ QColor4ub colorFromId( comma::uint32 id ) // quick and dirty, arbitrary
 
 Tool::Tool( Viewer& viewer, QCursor* cursor ) : m_viewer( viewer ), m_cursor( cursor ) {}
 
-void Tool::onMousePress( QMouseEvent* e ) { m_viewer.Qt3D::View::mousePressEvent( e );}
-void Tool::onMouseRelease( QMouseEvent* e ) { m_viewer.Qt3D::View::mouseReleaseEvent( e ); }
-void Tool::onMouseMove( QMouseEvent* e ) { m_viewer.Qt3D::View::mouseMoveEvent( e ); }
+void Tool::onMousePress( QMouseEvent* e ) { m_viewer.qt3d::view::mousePressEvent( e );}
+void Tool::onMouseRelease( QMouseEvent* e ) { m_viewer.qt3d::view::mouseReleaseEvent( e ); }
+void Tool::onMouseMove( QMouseEvent* e ) { m_viewer.qt3d::view::mouseMoveEvent( e ); }
 void Tool::draw( QGLPainter* painter ) {}
 
 void Tool::toggle( bool checked )
@@ -246,7 +246,7 @@ void SelectClip::onMouseRelease( QMouseEvent* e )
     {
         for( std::size_t i = 0; i < m_viewer.datasets().size(); ++i ) { m_viewer.dataset( i ).selection().clear(); }
     }
-    Extents< Eigen::Vector3d > extents;
+    snark::graphics::extents< Eigen::Vector3d > extents;
     extents.add( m_centre - m_radius );
     extents.add( m_centre + m_radius );
     for( std::size_t i = 0; i < m_viewer.datasets().size(); ++i )
@@ -264,7 +264,7 @@ void SelectClip::onMouseRelease( QMouseEvent* e )
 void SelectClip::draw( QGLPainter* painter )
 {
     if( !m_rectangle ) { return; }
-    comma::Extents< Eigen::Vector3d > extents;
+    snark::graphics::extents< Eigen::Vector3d > extents;
     Eigen::Vector3d center = m_centre;
     if( m_viewer.m_offset )
     {
@@ -293,7 +293,7 @@ void SelectClip::draw( QGLPainter* painter )
     vertices.append( g );
     vertices.append( h );
     painter->setStandardEffect( QGL::FlatColor );
-    painter->setVertexAttribute(QGL::position, vertices );
+    painter->setVertexAttribute(QGL::Position, vertices );
     painter->draw( QGL::LineLoop, 4 );
     painter->draw( QGL::LineLoop, 4, 4 );
     boost::array< unsigned short, 8  > indices = { { 0, 4, 1, 5, 2, 6, 3, 7 } };

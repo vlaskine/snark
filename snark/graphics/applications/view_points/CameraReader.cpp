@@ -26,18 +26,18 @@
 #include <cmath>
 #include <sstream>
 #include <boost/bind.hpp>
-#include <comma/Base/exception.h>
-#include <comma/Base/Types.h>
-#include <comma/csv/Stream.h>
-#include <comma/Io/Select.h>
+#include <comma/base/exception.h>
+#include <comma/base/types.h>
+#include <comma/csv/stream.h>
+#include <comma/io/select.h>
 #include "./CameraReader.h"
 
 namespace snark { namespace graphics { namespace View {
 
-CameraReader::CameraReader( csv::Options& options )
+CameraReader::CameraReader( comma::csv::options& options )
     : options( options )
     , m_shutdown( false )
-    , m_istream( options.filename, options.binary() ? Io::Mode::binary : Io::Mode::ascii )
+    , m_istream( options.filename, options.binary() ? comma::io::mode::binary : comma::io::mode::ascii )
 {
 }
 
@@ -70,9 +70,9 @@ bool CameraReader::readOnce()
         if( !m_stream ) // quick and dirty: handle named pipes
         {
             if( !m_istream() ) { return true; }
-            m_stream.reset( new csv::InputStream< PointWithorientation >( *m_istream, options ) );
+            m_stream.reset( new comma::csv::input_stream< point_with_orientation >( *m_istream, options ) );
         }
-        const PointWithorientation* p = m_stream->read();
+        const point_with_orientation* p = m_stream->read();
         if( p == NULL ) { m_shutdown = true; return false; }
         boost::recursive_mutex::scoped_lock lock( m_mutex );
         m_position = p->point;

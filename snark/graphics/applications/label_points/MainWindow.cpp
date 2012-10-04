@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <QDialog>
 #include <QLabel>
-#include <comma/Base/Types.h>
+#include <comma/base/types.h>
 #include "./Actions.h"
 #include "./MainWindow.h"
 #include "./Viewer.h"
@@ -200,8 +200,8 @@ void MainWindow::updateFileFrame()
     {
         for( unsigned int k = 0; k < 3; ++k )
         {
-            if( m_fileLayout->itemAtposition( i + 1, k ) == NULL ) { continue; }
-            QWidget* widget = m_fileLayout->itemAtposition( i + 1, k )->widget();
+            if( m_fileLayout->itemAtPosition( i + 1, k ) == NULL ) { continue; }
+            QWidget* widget = m_fileLayout->itemAtPosition( i + 1, k )->widget();
             m_fileLayout->removeWidget( widget );
             delete widget;
         }

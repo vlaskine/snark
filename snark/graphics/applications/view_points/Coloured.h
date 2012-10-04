@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_
 
 #include <string>
 #include <Qt3D/qcolor4ub.h>
@@ -114,4 +114,4 @@ coloured* colourFromString( const std::string& s, const std::string& fields, con
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_COLOURED_H_*/

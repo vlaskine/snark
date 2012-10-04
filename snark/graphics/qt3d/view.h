@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_GL_VIEW_H_
-#define RUR_GRAPHICS_GL_VIEW_H_
+#ifndef SNARK_GRAPHICS_GL_VIEW_H_
+#define SNARK_GRAPHICS_GL_VIEW_H_
 
 #include <boost/optional.hpp>
 #include <boost/thread.hpp>
@@ -27,7 +27,7 @@
 #include <QMouseEvent>
 #include "./coordinates.h"
 
-namespace snark { namespace graphics { namespace Qt3D {
+namespace snark { namespace graphics { namespace qt3d {
 
 /// base class for 3d viewers with mouse navigation    
 class view : public QGLView
@@ -67,6 +67,6 @@ private:
     bool m_show_coordinates;
 };
 
-} } } // namespace snark { namespace graphics { namespace GL {
+} } } // namespace snark { namespace graphics { namespace gt3d {
 
-#endif /*RUR_GRAPHICS_GL_VIEW_H_*/
+#endif /*SNARK_GRAPHICS_GL_VIEW_H_*/

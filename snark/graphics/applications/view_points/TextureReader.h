@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_
 
 
 #include "./Reader.h"
@@ -29,7 +29,7 @@ namespace snark { namespace graphics { namespace View {
 class TextureReader : public Reader
 {
     public:
-        TextureReader( QGLView& viewer, csv::Options& options, const std::string& file, double width, double height );
+        TextureReader( QGLView& viewer, comma::csv::options& options, const std::string& file, double width, double height );
 
         void start();
         void update( const Eigen::Vector3d& offset );
@@ -39,7 +39,7 @@ class TextureReader : public Reader
         bool empty() const;
 
     protected:
-        boost::scoped_ptr< csv::InputStream< PointWithId > > m_stream;
+        boost::scoped_ptr< comma::csv::input_stream< PointWithId > > m_stream;
         const std::string m_file;
         QGeometryData m_geometry;
         QGLBuilder m_builder;
@@ -51,4 +51,4 @@ class TextureReader : public Reader
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_READER_H_*/

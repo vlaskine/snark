@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_EXCEPTION_H_
-#define RUR_GRAPHICS_EXCEPTION_H_
+#ifndef SNARK_GRAPHICS_EXCEPTION_H_
+#define SNARK_GRAPHICS_EXCEPTION_H_
 
 #include <comma/base/exception.h>
 
@@ -28,4 +28,4 @@ typedef ::comma::exception exception;
 
 } } // namespace snark { namespace graphics {
 
-#endif // RUR_GRAPHICS_EXCEPTION_H_
+#endif // SNARK_GRAPHICS_EXCEPTION_H_

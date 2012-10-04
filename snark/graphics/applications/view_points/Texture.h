@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_
 
 #include <Qt3D/qgltexture2d.h>
 #include <Qt3D/qglscenenode.h>
@@ -56,4 +56,4 @@ private:
 
 } } } // namespace snark { namespace graphics
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_TEXTURE_H_*/

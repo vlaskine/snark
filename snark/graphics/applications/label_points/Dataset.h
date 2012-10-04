@@ -16,13 +16,13 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_
-#define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_
+#define SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_
 
 #include <deque>
 #include <comma/base/types.h>
 #include <comma/csv/options.h>
-#include <snark/graphics/extents.h>
+#include <snark/graphics/impl/extents.h>
 #include <snark/graphics/vector.h>
 #include <snark/graphics/qt3d/vertex_buffer.h>
 #include "./PointMap.h"
@@ -62,7 +62,7 @@ class BasicDataset
         bool m_visible;
         Points m_points;
         Partitions m_partitions;
-        boost::scoped_ptr< Qt3D::vertex_buffer > m_vertices;
+        boost::scoped_ptr< qt3d::vertex_buffer > m_vertices;
         boost::optional< Eigen::Vector3d > m_offset;
         graphics::extents< Eigen::Vector3d > m_extents;
         void insert( const Eigen::Vector3d& p, const Data& data );
@@ -71,8 +71,8 @@ class BasicDataset
 class Dataset : public BasicDataset
 {
     public:
-        Dataset( const std::string& filename, const csv::Options& options, bool relabelDuplicated );
-        Dataset( const std::string& filename, const csv::Options& options, const Eigen::Vector3d& offset, bool relabelDuplicated );
+        Dataset( const std::string& filename, const comma::csv::options& options, bool relabelDuplicated );
+        Dataset( const std::string& filename, const comma::csv::options& options, const Eigen::Vector3d& offset, bool relabelDuplicated );
         void save();
         void saveAs( const std::string& f );
         void load();
@@ -86,9 +86,9 @@ class Dataset : public BasicDataset
         BasicDataset& selection();
         const BasicDataset& selection() const;
         const std::string& filename() const;
-        const csv::Options& options() const;
+        const comma::csv::options& options() const;
         bool valid() const;
-        static void repair( const csv::Options& options );
+        static void repair( const comma::csv::options& options );
     
     private:
         void insert( const Points& m );
@@ -100,7 +100,7 @@ class Dataset : public BasicDataset
         typedef std::deque< std::pair< PointWithId, std::string > > Deque;
         Deque m_deque;
         std::string m_filename;
-        const csv::Options m_options;
+        const comma::csv::options m_options;
         boost::scoped_ptr< BasicDataset > m_selection;
         bool m_writable;
         bool m_modified;
@@ -109,4 +109,4 @@ class Dataset : public BasicDataset
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif // RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_
+#endif // SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_DATASET_H_

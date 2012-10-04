@@ -25,11 +25,11 @@
 
 namespace snark { namespace graphics { namespace View {
 
-Viewer::Viewer( const std::vector< csv::Options >& options
+Viewer::Viewer( const std::vector< comma::csv::options >& options
               , bool labelDuplicated
               , const QColor4ub& background_color
               , bool orthographic, double fieldOfView )
-    : Qt3D::View( background_color, fieldOfView, false, orthographic )
+    : qt3d::view( background_color, fieldOfView, false, orthographic )
     , navigate( *this )
     , pickId( *this )
     , selectPartition( *this )
@@ -75,7 +75,7 @@ void Viewer::reload()
     for( std::size_t i = 0; i < m_datasets.size(); ++i )
     {
         std::string filename = m_datasets[i]->filename();
-        csv::Options options = m_datasets[i]->options();
+        comma::csv::options options = m_datasets[i]->options();
         bool writable = m_datasets[i]->writable();
         bool visible = m_datasets[i]->visible();
         m_datasets[i].reset();
@@ -91,7 +91,7 @@ void Viewer::reload()
 
 void Viewer::setCamera()
 {
-    Extents< Eigen::Vector3d > extents;
+    snark::graphics::extents< Eigen::Vector3d > extents;
     for( std::size_t i = 0; i < m_datasets.size(); ++i ) { extents.add( m_datasets[i]->extents() ); }
     extents.add( extents.min() - Eigen::Vector3d( 10, 10, 10 ) ); // expand a bit
     extents.add( extents.max() + Eigen::Vector3d( 10, 10, 10 ) ); // expand a bit
@@ -176,7 +176,7 @@ boost::optional< std::pair< Eigen::Vector3d, comma::uint32 > > Viewer::pointSele
         }
         std::cerr << " clicked point " << p.transpose() << std::endl;
 
-        Extents< Eigen::Vector3d > e;
+        snark::graphics::extents< Eigen::Vector3d > e;
         e.add( p - Eigen::Vector3d::Ones() );
         e.add( p + Eigen::Vector3d::Ones() );
         double minDistanceSquare = std::numeric_limits< double >::max();

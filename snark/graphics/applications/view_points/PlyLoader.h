@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_
-#define RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_
 
 #include <Qt3D/qgeometrydata.h>
 #include <Qt3D/qglbuilder.h>
@@ -38,4 +38,4 @@ private:
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif /*RUR_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_*/
+#endif /*SNARK_GRAPHICS_APPLICATIONS_VIEWPOINTS_PLY_LOADER_H_*/

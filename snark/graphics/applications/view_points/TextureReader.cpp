@@ -17,7 +17,7 @@
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
 #include <Eigen/Core>
-#include <comma/Math/rotation_matrix.h>
+#include <snark/graphics/qt3d/rotation_matrix.h>
 #include "./TextureReader.h"
 #include "./Texture.h"
 
@@ -29,7 +29,7 @@ namespace snark { namespace graphics { namespace View {
 /// @param file image filename
 /// @param width image width in meters to be displayed in the scene
 /// @param height image height in meters to be displayed in the scene
-TextureReader::TextureReader( QGLView& viewer, comma::csv::Options& options, const std::string& file, double width, double height )
+TextureReader::TextureReader( QGLView& viewer, comma::csv::options& options, const std::string& file, double width, double height )
     : Reader( viewer, options, 1, NULL, 1, "", QVector3D( 0, 1, 1 ) ), 
       m_file( file ),
       m_image( file.c_str() )
@@ -54,7 +54,7 @@ TextureReader::TextureReader( QGLView& viewer, comma::csv::Options& options, con
 
 void TextureReader::start()
 {        
-    m_extents = comma::Extents< Eigen::Vector3f >();
+    m_extents = snark::graphics::extents< Eigen::Vector3f >();
 
     m_thread.reset( new boost::thread( boost::bind( &Reader::read, boost::ref( *this ) ) ) );
 }
@@ -91,7 +91,7 @@ bool TextureReader::readOnce()
     if( !m_stream ) // quick and dirty: handle named pipes
     {
         if( !m_istream() ) { return true; }
-        m_stream.reset( new csv::InputStream< PointWithId >( *m_istream(), options ) );
+        m_stream.reset( new comma::csv::input_stream< PointWithId >( *m_istream(), options ) );
     }
     const PointWithId* p = m_stream->read();
     if( p == NULL ) { m_shutdown = true; return false; }

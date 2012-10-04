@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public
 // License along with snark. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
-#define RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
+#ifndef SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
+#define SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
 
 #ifdef WIN32
 #include <WinSock2.h>
@@ -46,7 +46,7 @@ namespace snark { namespace graphics { namespace View {
 
 static const long double pi_ = 3.14159265358979323846l;    
     
-class Viewer : public Qt3D::View
+class Viewer : public qt3d::view
 {
     Q_OBJECT
 
@@ -58,7 +58,7 @@ class Viewer : public Qt3D::View
         Tools::SelectClip selectClip; 
         Tools::Fill fill;
 
-        Viewer( const std::vector< csv::Options >& options
+        Viewer( const std::vector< comma::csv::options >& options
               , bool labelDuplicated
               , const QColor4ub& background_color
               , bool orthographic = false, double fieldOfView = pi_ / 4 );
@@ -99,7 +99,7 @@ class Viewer : public Qt3D::View
         std::vector< boost::shared_ptr< Dataset > > m_datasets;
         boost::optional< comma::uint32 > m_id;
         const QColor4ub m_background_color;
-        std::vector< csv::Options > m_options;
+        std::vector< comma::csv::options > m_options;
         bool m_labelDuplicated;
         bool m_orthographic;
         double m_fieldOfView;
@@ -110,4 +110,4 @@ class Viewer : public Qt3D::View
 
 } } } // namespace snark { namespace graphics { namespace View {
 
-#endif // RUR_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
+#endif // SNARK_GRAPHICS_APPLICATIONS_LABELPOINTS_VIEWER_H_
