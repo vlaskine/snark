@@ -108,7 +108,7 @@ IF( snark_BUILD_TESTS )
     SET( GTEST_BOTH_LIBRARIES gtest gtest_main )
 ENDIF( snark_BUILD_TESTS )
 
-OPTION( snark_build_graphics "build graphics" OFF )
+OPTION( snark_build_graphics "build graphics" ON )
 
 FIND_PACKAGE( comma PATHS ${comma_DIR} /usr/local/CMakeFiles )
 
